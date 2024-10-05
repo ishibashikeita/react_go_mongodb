@@ -24,6 +24,7 @@ services:
         container_name: mongodb
         volumes:
             - mongodata:/data/db
+            - ./mongo/migration.js:/docker-entrypoint-initdb.d/migration.js
         ports:
             - "27017:27017"
 volumes:
