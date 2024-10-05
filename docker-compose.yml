@@ -9,3 +9,23 @@ services:
         command: sh -c "yarn start"
         ports:
             - "3000:3000"
+    dbapi:
+        build:
+            context: ./backend/go
+            dockerfile: Dockerfile
+        links:
+            - mongodb
+        depends_on:
+            - mongodb
+        ports:
+            - "9090:9090"
+    mongodb:
+        image: mongo
+        container_name: mongodb
+        volumes:
+            - mongodata:/data/db
+        ports:
+            - "27017:27017"
+volumes:
+    mongodata:
+        driver: local
